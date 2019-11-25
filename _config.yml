@@ -10,8 +10,7 @@ baseurl: ""
 
 # Sidebar settings
 sidebar: true                           
-sidebar-about-description: "114514"
-sidebar-avatar:/img/profile.jpg     
+sidebar-about-description: "114514"  
 
 # SNS settings
 RSS: false
