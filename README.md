@@ -1,37 +1,34 @@
-## Welcome to GitHub Pages
+# WELCOME 2 EDDY'S BLOG
+***There're more. There're always more...***
 
-You can use the [editor on GitHub](https://github.com/anlowee/anlowee.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+---
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+<!-- TOC -->
 
-### Markdown
+- [WELCOME 2 EDDY'S BLOG](#welcome-2-eddys-blog)
+  - [WHAT'S NEW](#whats-new)
+  - [LOG](#log)
+  - [Support or Contact](#support-or-contact)
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+<!-- /TOC -->
 
-```markdown
-Syntax highlighted code block
+---
 
-# Header 1
-## Header 2
-### Header 3
+## WHAT'S NEW
++ Eddy set up his blog!
++ Eddy set up his blog!
++ Eddy set up his blog!
 
-- Bulleted
-- List
+***Last update on: 11/25/2019***
 
-1. Numbered
-2. List
+---
 
-**Bold** and _Italic_ and `Code` text
+## LOG
 
-[Link](url) and ![Image](src)
-```
+---
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Support or Contact
 
-### Jekyll Themes
+Thanks to Github Pages! If you have any trouble with Pages, check out their [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and get help.
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/anlowee/anlowee.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+---
