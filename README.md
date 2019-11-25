@@ -24,7 +24,7 @@
 ---
 
 ## LOG
-+ 11/25/2019 [Hello](_posts/2019-11-25-Hello-2019.md)
++ 11/25/2019 [Hello](http://iamwxc.com/2019/11/25/Hello-2019.html)
 
 ---
 
