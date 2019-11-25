@@ -1,17 +1,17 @@
 # Site settings
-title: EDDY's BLOG                     #你博客的标题
-SEOTitle: Here I Am! | EDDY        #显示在浏览器上搜索的时候显示的标题
-header-img: img/post-bg-rwd.jpg     #显示在首页的背景图片
+title: EDDY's BLOG                     
+SEOTitle: Here I Am! | EDDY        
+header-img: img/post-bg-rwd.jpg   
 email: eddyw2222@gmail.com    
-description: "My name is Eddy Goei, study at WHU, major in CS."              #网站介绍
-keyword: "EDDY, EDDY BLOG, 小葱的博客, xiaocong, 小葱, Microsoft, windows, WHU" #关键词
-url: "http://anlowee.github.io"          # 这个就是填写你的博客地址
-baseurl: ""      # 这个我们不用填写
+description: "My name is Eddy Goei, study at WHU, major in CS."         
+keyword: "EDDY, EDDY BLOG, 小葱的博客, xiaocong, 小葱, Microsoft, windows, WHU" 
+url: "http://anlowee.github.io"          
+baseurl: ""     
 
 # Sidebar settings
-sidebar: true                           # 是否开启侧边栏.
+sidebar: true                           
 sidebar-about-description: "114514"
-sidebar-avatar:/img/avatar-by.JPG      # 你的个人头像 这里你可以改成我在img文件夹中的两张备用照片 img/avatar-m 或 avatar-g
+sidebar-avatar:/img/profile.jpg     
 
 # SNS settings
 RSS: false
