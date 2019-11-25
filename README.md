@@ -24,7 +24,7 @@
 ---
 
 ## LOG
-+ [11/25/2019](https://github.com/anlowee/anlowee.github.io/blob/master/blogs/20191125.md)
++ [11/25/2019](https://github.com/anlowee/anlowee.github.io/blob/master/_posts/20191125.md)
 
 ---
 
