@@ -15,15 +15,14 @@
 ---
 
 ## WHAT'S NEW
-+ Eddy set up his blog!
-+ Eddy set up his blog!
-+ Eddy set up his blog!
++ Eddy upload his data structure exp-report(semifinished)
 
 ***Last update on: 11/25/2019***
 
 ---
 
 ## LOG
++ 11/29/2019 [DS_EXP_Report](_posts/2019-11-25-DS_EXP_Report-2019.md)
 + 11/25/2019 [Hello](_posts/2019-11-25-Hello-2019.md)
 
 ---
