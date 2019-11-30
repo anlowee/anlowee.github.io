@@ -15,6 +15,7 @@
 ---
 
 ## WHAT'S NEW
++ Update DS Report, complete.
 + CSAPP 3rd homework complete.
 
 ***Last update on: 11/30/2019***

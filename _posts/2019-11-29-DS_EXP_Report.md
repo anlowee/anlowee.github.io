@@ -48,6 +48,7 @@ tags:
     - [HDU3966](#hdu3966)
       - [Description](#description-3)
       - [Analysis](#analysis-3)
+      - [Algorithm](#algorithm-3)
       - [Code(C++)](#codec)
   - [Conclusion](#conclusion)
 
@@ -338,8 +339,286 @@ public class Main {
 ### HDU3966
 **[👉CLICK HERE](http://acm.hdu.edu.cn/showproblem.php?pid=3966)**
 #### Description
+There are $N(1 \leq N \leq 50000)$ vertixs, $M(M = N - 1)$ edges, $P(1 \leq P \leq 100000)$ operations. Operations include `I C1 C2 K` and `D C1 C2 K` and `Q C`. `I` means increase, `D` means decrease, and `C1 C2` means from vertix `C1` to `C2`, `K` means how many you want to increase or decrease. `Q` means query and `C` means the current time what's the weight of vertix `C`.
+
 #### Analysis
+Due to the fact that $M = N - 1$, the entire graph must be a tree. And there are too many operations including update and query on the tree, so we can easily think about **Tree-chain partition**. Tree-chain partition is a algorithm, usually, it uses segment-tree as data structure and maintain data with it. It is very hlepful to deal with plenty update and query operations on the tree. Actually, the advantage of update and query is from segment-tree, and segment-tree usually can only deal with arrays. So how to transform a tree structure that segment-tree can deal with? **Tree-chain** is the point. It tear the tree to some **heavy-son chain**, which is made of the son nodes that have the maximum subtree, and then renumber the vertixs of tree. After renumbering, the vertixs of tree can be save in an array, then just do what you do with segment-tree.
+
+#### Algorithm
++ Firstly, $DFS$ to get the depth and subtree size of each node.
++ Then, $DFS$ again to renumber the nodes and get each heavy-son chain's top.
++ Update and query just like in segment-tree.
+
 #### Code(C++)
+~~~C++
+// Java's efficency is too low due to the low speed of reading and writing data
+// Thus, I use C++ to resolve this puzzle, it is more readable and efficent
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+#include <cmath>
+using namespace std;
+#define maxN 50010
+#define lson node << 1
+#define rson node << 1 | 1
+#define vt(i) segt[i].value
+#define lt(i) segt[i].length
+#define mt(i) segt[i].mark
+#define fr(i) edge[i].from
+#define to(i) edge[i].to
+#define nx(i) edge[i].next
+#define hd(i) edge[i].head
+#define fa(i) g[i].father
+#define tp(i) g[i].top
+#define dp(i) g[i].deep
+#define sn(i) g[i].son
+#define sz(i) g[i].size
+#define id(i) g[i].ind
+
+typedef long long LL;
+
+void init();
+void work();
+void addedge(int, int, int);
+void build(int, int, int);
+void Turn();
+void dfs1(int, int);
+void dfs2(int, int);
+void pushup(int);
+void pushdown(int);
+void update(int, int, int, int, int, int);
+LL query(int, int, int, int, int);
+void solve1(int, int, int);
+
+// segment tree node
+struct seg
+{
+    LL value;
+    int length, mark;
+} segt[maxN * 4];
+// edge
+struct Edge
+{
+    int from, to, next, head;
+} edge[maxN * 2];
+// original graph vertix
+struct G
+{
+    int father, son, size, ind, top, deep;
+} g[maxN];
+
+int n, m, r;
+int inde;
+int val[maxN], val0[maxN];  // val stores original weight of vertix, val0 is after renumbering
+int main()
+{
+    int x;
+    while (scanf("%d", &n) != EOF)  // there are multiple cases
+    {
+        memset(val, 0, sizeof(val));
+        memset(val0, 0, sizeof(val0));
+        memset(segt, 0, sizeof(segt));
+        memset(g, 0, sizeof(g));
+        memset(edge, 0, sizeof(edge));
+        inde = 0;   // used to renumber
+        scanf("%d%d", &x, &m);  // x is useless, because it must equal to n - 1
+        init();
+        work();
+    }
+
+    return 0;
+}
+
+void init()
+{
+    for (int i = 1; i <= n; i++)
+        scanf("%d", &val0[i]);
+    for (int i = 1; i < n; i++)
+    {
+        int u, v;
+        scanf("%d%d", &u, &v);
+        addedge(i, u, v);
+        addedge(i + n, v, u);
+    }
+}
+
+// here use a special way to realize adjacency-list
+// I use array as adjacency-list, which I always used this in NOIP and ACM competition
+void addedge(int od, int u, int v)
+{
+    fr(od) = u;
+    to(od) = v;
+    nx(od) = hd(u);
+    hd(u) = od;
+}
+
+// get depth and size and heavy-son of each vertix
+void dfs1(int od, int dp)   // od-vertix's index, dp-depth
+{
+    dp(od) = dp;
+    sz(od) = 1;
+    for (int i = hd(od); i; i = nx(i))  // scan each son of current node, to(i) is its son
+    {
+        if (sz(to(i)))  // if current son's size has been caculated, skip it
+            continue;
+        fa(to(i)) = od; // mark son's father
+        dfs1(to(i), dp + 1);    
+        sz(od) += sz(to(i));    // current node's size is the sum of each son's subtree size
+        if (sz(to(i)) > sz(sn(od))) // get the heavy-son, which subtree size is maximum
+            sn(od) = to(i);
+    }
+}
+
+void dfs2(int od, int tp)
+{
+    tp(od) = tp;    // mark the top of the chain including current node
+    id(od) = ++inde;    // the indexs in same heavy-chain is continuous
+    if (sn(od)) // dfs along the heavy-son, so that we can get the heavy-chain
+        dfs2(sn(od), tp);
+    for (int i = hd(od); i; i = nx(i))  // scan each son of current node, to(i) is its son
+        if (!id(to(i))) // other sons except heavy-son starts a new heavy-chain which set themselves as the top
+            dfs2(to(i), to(i));
+}
+
+// renumber the original weight array to build segment-tree
+void Turn()
+{
+    for (int i = 1; i <= n; i++)
+    {
+        val[id(i)] = val0[i];
+    }
+}
+
+void build(int node, int l, int r)
+{
+    lt(node) = r - l + 1;   // caculate the length of current node's segment
+    if (l == r)
+    {
+        vt(node) = val[l] * 1ll;    // if the length = 1, it's a single node, just assign the value from array
+        return;
+    }
+
+    int mid = (l + r) >> 1;
+    build(lson, l, mid);    // build left subtree
+    build(rson, mid + 1, r);    // build right subtree
+    pushup(node);   // merge two subtree
+}
+
+void pushup(int node)
+{
+    vt(node) = (vt(lson) + vt(rson));
+}
+
+// This is the most important step in segment-tree, delay mark
+// which makes segment-tree a very efficient data structure
+// cause you donot need to update each node's value
+// you just need to mark the segment you want to update
+// When you need to refer(update or query) the node in this segment, just pushdown the mark
+// Thus, it reduces a lot of operations of update
+void pushdown(int node)
+{
+    if (!mt(node))
+        return;
+    // pushdown the current node's mark
+    vt(lson) = (vt(lson) + lt(lson) * mt(node));
+    vt(rson) = (vt(rson) + lt(rson) * mt(node));
+    mt(lson) = (mt(lson) + mt(node));
+    mt(rson) = (mt(rson) + mt(node));
+    mt(node) = 0;   // reset the mark
+}
+
+// l and r are node's segment's left and right boundary
+// ll and rr are the boundary that you want to update
+// z is the value you want to update
+void update(int node, int l, int r, int ll, int rr, int z)
+{
+    // when the current node's segment is included in the segment you want to update
+    // just adpat the node's value and mark it
+    if (l >= ll && r <= rr)
+    {
+        vt(node) = (vt(node) + lt(node) * z);
+        mt(node) = (mt(node) + z);
+        return;
+    }
+
+    pushdown(node); // because it needs to access subtree, you need to pushdown mark first
+    int mid = (l + r) >> 1;
+    // the update segment may be divided in both left subtree and right subtree
+    if (ll <= mid)
+        update(lson, l, mid, ll, rr, z);   
+    if (rr > mid)
+        update(rson, mid + 1, r, ll, rr, z);
+    pushup(node);   // after subtree update, update the current node's value
+}
+
+// l and r are node's segment's left and right boundary
+// ll and rr are the boundary that you want to query
+// Specially, in this puzzle ll == rr
+LL query(int node, int l, int r, int ll, int rr)
+{
+    if (l > rr || r < ll)
+        return 0;
+    if (l >= ll && r <= rr)
+        return (vt(node));
+
+    pushdown(node);
+    int mid = (l + r) >> 1;
+    return (query(lson, l, mid, ll, rr) + query(rson, mid + 1, r, ll, rr));
+}
+
+// u and v is two vertixs
+// z is the value you want to update
+void solve1(int u, int v, int z)
+{
+    while (tp(u) != tp(v))  // this is similar with LCA
+    {
+        // each time, we update from the node whose top is deeper
+        if (dp(tp(u)) < dp(tp(v)))
+            swap(u, v);
+
+        update(1, 1, n, id(tp(u)), id(u), z);   // due to the continueous indexs in a chain
+        u = fa(tp(u));
+    }
+
+    if (dp(u) < dp(v))
+        swap(u, v);
+    update(1, 1, n, id(v), id(u), z);
+}
+
+void work()
+{
+    dfs1(1, 1); // addtion tell us 1 is root, and its depth is 1, so two parametres are (1, 1)
+    dfs2(1, 1); // 1 is root and its top is itself, so two parametres are (1, 1) 
+    Turn(); // renumber
+    build(1, 1, n); // buile segment-tree
+    for (int i = 1; i <= m; i++)
+    {
+        char cmd[10];
+        scanf("%s", &cmd);
+        if (cmd[0] == 'I')
+        {
+            int x, y, z;
+            scanf("%d%d%d", &x, &y, &z);
+            solve1(x, y, z);
+        }
+        else if (cmd[0] == 'D')
+        {
+            int x, y, z;
+            scanf("%d%d%d", &x, &y, &z);
+            z = -z;
+            solve1(x, y, z);
+        }
+        else if (cmd[0] == 'Q')
+        {
+            int x;
+            scanf("%d", &x);
+            printf("%lld\n", query(1, 1, n, id(x), id(x)));
+        }
+    }
+}
+~~~
+
+![HDU3966AC](http://www.iamwxc.com/img/hdu3966ac.png)
 
 ---
 
