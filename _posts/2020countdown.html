@@ -1,0 +1,62 @@
+<div>
+    <div style="color: rgb(235, 55, 11);">
+        <h1>
+            <center>2020 New Year's Countdown</center>
+        </h1>
+    </div>
+    <div style="color: darkmagenta;">
+        <h3>
+            <center>2020.1.1 Wednesday, Eddy wish you a good new year!</center>
+        </h3>
+    </div>
+    <h3>
+        <center>How much time left?</center>
+    </h3>
+    <div style="color:rgb(8, 71, 16)">
+        <h1>
+            <center>
+                <span id="t_d"></span>
+                <span id="t_h"></span>
+                <span id="t_m"></span>
+                <span id="t_s"></span>
+            </center>
+        </h1>
+    </div>
+    <div style="color: darkorange;">
+        <center>
+            <h2>
+                Make your wish!(GPA↑ or gf/bf or money or ...)
+            </h2>
+        </center>
+    </div>
+    <div style="color:navy">
+        <center>
+            <form>
+                Your wish: <input type="text" name="wish" />
+                <input type="submit" style="color: hotpink;" value="2020 ❤ HERE I COME!" onclick="sendGoodWish()" />
+            </form>
+        </center>
+    </div>
+    <script type="text/javascript">
+        function getRTime() {
+            var EndTime = new Date('2020/01/01 00:00:00');
+            var NowTime = new Date();
+            var t = EndTime.getTime() - NowTime.getTime();
+            var d = Math.floor(t / 1000 / 60 / 60 / 24);
+            var h = Math.floor(t / 1000 / 60 / 60 % 24);
+            var m = Math.floor(t / 1000 / 60 % 60);
+            var s = Math.floor(t / 1000 % 60);
+
+            document.getElementById("t_d").innerHTML = d + " day";
+            document.getElementById("t_h").innerHTML = h + " hour";
+            document.getElementById("t_m").innerHTML = m + " minute";
+            document.getElementById("t_s").innerHTML = s + " second";
+        }
+        setInterval(getRTime, 1);
+    </script>
+    <script language="javascript">
+        function sendGoodWish() {
+            alert("Ah! Your 2020 will be a 船 新 体 验!");
+        }
+    </script>
+</div>
