@@ -1,6 +1,9 @@
-title: Minimal theme
-logo: /assets/img/logo.png
-description: Minimal is a theme for GitHub Pages.
-show_downloads: true
+title: Hi! I am 魏啸冲.
+logo: /assets/img/me2.jpeg
+description: I am a MASc student in the Department of Electrical and Computer Engineering (ECE) at the University of Toronto. My supervisor is Ding Yuan. I received my B.Eng. (June 2022) with Honours from Hongyi Hornor Colledge (Computer Science and Technology) at Wuhan University. My research interests include performance and failure diagnosis and optimization in software systems.
+show_downloads: false
 google_analytics:
 theme: jekyll-theme-minimal
+remote_theme: pages-themes/minimal@v0.2.0
+plugins:
+- jekyll-remote-theme # add this line to the plugins list if you already have one
