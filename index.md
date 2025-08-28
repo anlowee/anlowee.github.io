@@ -13,6 +13,13 @@ When I have time, I usually play the guitar, play video games, cook, or practice
 
 # News
 
+## *28/08/2025* Check out our latest blog on CLP integrated with Presto! 🥳
+
+We’re excited to share our latest deep-dive: *"Querying CLP-compressed logs with SQL via Presto"*. In this post, we walk through how we built a CLP connector for Presto, enabling users to query CLP-compressed logs directly with SQL—without the need for decompression.
+I’m especially grateful to my team for giving me the opportunity to make an impact on this project. I was able to spearhead several subprojects, including **pushdown generation optimization**, **streaming and S3 support**, **end-to-end CI automation**, and **cloud-native integration**. Each of these efforts has been a huge learning experience and has helped me gain valuable skills along the way.
+
+Read the full story 📖 in our [blog post][presto_blog]!
+
 ## *30/07/2025* Check out our latest project: Log Archival Bench (LAB)! 🥳
 
 We’re excited to introduce **Log Archival Bench (LAB)** — a benchmark designed to evaluate log archival and analytics performance across *ClickHouse*, *CLP*, *Elasticsearch*, *Presto*, and *SparkSQL*.
@@ -57,6 +64,7 @@ Responsible for Android client development of **Tik Tok** in China. I have got i
 [abby]: https://github.com/AVMatthews
 [john]: https://github.com/PacificViking
 [lab_blog]: https://blog.yscope.com/log-archival-bench-a-framework-for-comparing-log-archival-analytics-tools-160e98b9d189
+[presto_blog]: https://blog.yscope.com/querying-clp-compressed-logs-with-prestosql-71dff29a0b82
 
 <!-- ### There's a horizontal rule below this.
 
